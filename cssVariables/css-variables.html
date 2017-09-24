@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS Variables Practice</title>
+	<link rel="stylesheet" type="text/css" href="css-variables.css">
+</head>
+
+<body>
+
+ <h1>Updating CSS Variables With <span class="color">JavaScript</span></h1>
+ 	<div class="controls">
+ 		<label for="eyes-left-right">Look Left/Right</label>
+ 		<input id="eyes-left-right" min="0" max="70" value="35" type="range" name="eyes" data-suffix="%" > <!-- suffix is used in updateValues -->
+
+ 		<label for="color">Hair Color</label>
+ 		<input id ="color" type="color" name="color" value="#996433">
+ 	</div>
+
+ 	<div class="container">
+ 		<div class="head">
+ 			<div class="face">
+ 				<div class="face-left"></div>
+ 				<div class="face-right"></div>
+
+ 			</div>
+
+ 			<!-- ears -->
+ 			<div class="left-ear">
+ 				<div class="inner-ear"></div>
+ 			</div>
+ 			<div class="right-ear">
+ 				<div class="inner-ear"></div>
+ 			</div>
+			<!-- eyes -->
+ 			<div class="left-eye">
+ 				<div class="pupil"></div>
+ 			</div>
+ 			<div class="right-eye">
+ 				<div class="pupil"></div>
+ 			</div>
+ 			<!-- lower face -->
+ 			<div class="lower-face">
+ 			<!-- nose -->
+			<div class="left-nostril"></div>
+			<div class="right-nostril"></div>
+			<!-- mouth -->
+			<div class="mouth" ></div>
+ 			</div>
+ 		</div>
+ 	</div>
+
+ 	<script>
+ 		var controls = document.querySelectorAll('.controls input');
+ 		
+ 		
+ 		function updateValues() {
+ 				if(this.name === 'color') {
+ 					//documentElement refers to the root css variable we change
+ 					document.documentElement.style.setProperty('--color', this.value);	
+ 				} else {
+ 					document.documentElement.style.setProperty('--eyes-left-right', this.value + this.dataset.suffix);	
+
+ 				}
+ 		}
+ 		
+ 		controls.forEach(control => control.addEventListener('change', updateValues));
+ 		controls.forEach(control => control.addEventListener('mousemove',updateValues));// listens for slider movement, not just where it stops
+ 	</script>
+
+</body>
+</html>

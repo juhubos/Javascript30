@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- //declares language of webpage, assists search engines & browsers -->
+<head>
+	<meta charset="UTF-8">
+	<title>myclock</title>
+</head>
+<body>
+
+
+	<div class="clock">
+	<!-- //clock border -->
+		<div class="clock-face">
+			<div class="hour-hand hand"></div>
+			<div class="minute-hand hand "></div>
+			<div class="second-hand hand "></div>
+		</div>
+	</div>
+
+	<style>
+
+
+		html {
+			background:#018DED; 
+      		background-size:cover;
+			font-size: 10px;
+			text-align: center;
+		}
+
+		body {
+			margin: 0;
+			display: flex;
+			align-items: center;
+			min-height: 100vh;
+			flex: 1;                /*what is flex 1 doing here?*/
+			font-size: 2rem;
+		}
+
+		.clock {
+			width: 30rem;
+			height: 30rem;
+			border-radius: 50%;
+			border: 1rem solid white;
+			margin:50px auto;
+			padding:2rem;
+		}
+
+		.clock-face {
+			position: relative; /*Any element that is a child of the relatively positioned element can be absolutely positioned within that block.*/
+			width: 100%;
+			height: 100%;
+			
+
+		}
+
+		.hand {
+			background-color: black;
+			width: 50%;
+			height: 8px;
+			transform-origin: 100%;
+			transform: rotate(90deg);
+	      	position: absolute;  /*can use abolute because parent is relative*/
+	      	top:50%;
+	      	
+			}
+
+		.hour-hand {
+			width:35%;
+			left: 15%;  /*offset needed to center hand at 50%*/
+      		
+		}
+
+		.second-hand {
+			background-color: red;
+			height: 4px;
+		} 
+		
+	</style>
+
+
+
+	<script>
+		
+		const hourHand = document.querySelector('.hour-hand');	
+		const minuteHand = document.querySelector('.minute-hand');
+		const secondHand = document.querySelector('.second-hand');
+
+		function animateClock() {
+			const todaysDate = new Date(); 
+
+			const hourDegrees = ((todaysDate.getHours() / 12 ) * 360) + 90;
+			const minuteDegrees = ((todaysDate.getMinutes() / 60)  * 360)  + 90;
+			const secondDegrees = ((todaysDate.getSeconds() / 60)  * 360) + 90;
+				//30 second / 60 gets = .5 (half a rotation) .. then multiply by 360 to convert to degrees ... 180 ( half a rotation). Add 90 degrees because we used rotate(90deg) in css to set starting point.
+			hourHand.style.transform =`rotate(${hourDegrees}deg)`;
+			minuteHand.style.transform =`rotate(${minuteDegrees}deg)`;
+			secondHand.style.transform =`rotate(${secondDegrees}deg)`;
+
+		} 
+
+		setInterval(animateClock,1000);
+
+	
+		
+
+	</script>
+</body>
+</html>
